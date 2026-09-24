@@ -1,4 +1,4 @@
-# 🚀 Ujjwal.AI [Quick] – AI SaaS Platform
+# Ujjwal.AI [Quick] – AI SaaS Platform
 
 Ujjwal.AI [Quick] is a full-stack AI SaaS application that provides AI-powered tools for content creation, image generation, and resume analysis.
 
