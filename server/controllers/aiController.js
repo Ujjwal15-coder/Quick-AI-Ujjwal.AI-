@@ -251,7 +251,7 @@
 //       });
 //     }
 
-//     // 🔹 Free usage check (same as articles/images)
+//     // Free usage check (same as articles/images)
 //     if (plan !== "premium" && free_usage >= 10) {
 //       return res.json({
 //         success: false,
@@ -259,13 +259,13 @@
 //       });
 //     }
     
-//     // ✅ Extract text from PDF
+//     // Extract text from PDF
 //     const buffer = fs.readFileSync(resume.path);
 //     const pdfData = await pdf(buffer);
 
 //     const prompt = `Review the following resume and provide constructive feedback on its strengths, weaknesses, and areas for improvement:\n\n${pdfData.text}`;
 
-//     // ✅ Send to AI
+//     // Send to AI
 //     const response = await AI.chat.completions.create({
 //       model: "gemini-3-flash-preview",
 //       messages: [{ role: "user", content: prompt }],
@@ -275,13 +275,13 @@
 
 //     const content = response.choices[0].message?.content || "No response generated";
 
-//     // ✅ Store in DB
+//     // Store in DB
 //     await sql`
 //       INSERT INTO creations (user_id, prompt, content, type)
 //       VALUES (${userId}, 'Resume Review', ${content}, 'resume-review')
 //     `;
 
-//     // 🔹 Update free usage for non-premium users
+//     // Update free usage for non-premium users
 //     if (plan !== "premium") {
 //       await clerkClient.users.updateUserMetadata(userId, {
 //         privateMetadata: {
@@ -315,12 +315,11 @@ const AI = new OpenAI({
 });
 
 
-// ==========================
 // GENERATE ARTICLE
-// ==========================
+
 export const generateArticle = async (req, res) => {
   try {
-    const { userId } = req.auth; // ✅ FIXED
+    const { userId } = req.auth; 
 
     const { prompt, length } = req.body;
     const plan = req.plan;
@@ -359,9 +358,9 @@ export const generateArticle = async (req, res) => {
 };
 
 
-// ==========================
+
 // GENERATE BLOG TITLE
-// ==========================
+
 export const generateBlogTitle = async (req, res) => {
   try {
     const { userId } = req.auth();
@@ -431,7 +430,7 @@ export const generateImage = async (req, res) => {
       formData,
       {
         headers: {
-          ...formData.getHeaders(), // ✅ important
+          ...formData.getHeaders(), 
           "x-api-key": process.env.CLIPDROP_API_KEY,
         },
         responseType: "arraybuffer",
@@ -610,7 +609,7 @@ export const resumeReview = async (req, res) => {
 
     const buffer = fs.readFileSync(resume.path)
 
-    // ✅ Dynamic import fixes ESM issue
+    // Dynamic import fixes ESM issue
     // const pdfModule = await import("pdf-parse");
     // const pdfData = await pdfModule.default(buffer);
     const pdfData = await pdf(buffer);
